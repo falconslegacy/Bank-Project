@@ -2,7 +2,7 @@
 #!/bin/bash
 
 # Simple Bank Application
-# Engineer 2 - Initial Application Structure
+# Engineer 3 - Deposit and Withdraw Functionality
 
 balance=1000
 
@@ -20,10 +20,21 @@ do
 
     case $choice in
         1)
-            echo "Deposit section"
+            read -p "Enter amount to deposit: " deposit
+            balance=$((balance + deposit))
+            echo "Deposited $deposit."
+            echo "New balance: $balance"
             ;;
         2)
-            echo "Withdraw section"
+            read -p "Enter amount to withdraw: " withdraw
+
+            if [ "$withdraw" -le "$balance" ]; then
+                balance=$((balance - withdraw))
+                echo "Withdrew $withdraw."
+                echo "New balance: $balance"
+            else
+                echo "Insufficient funds!"
+            fi
             ;;
         3)
             echo "Your current balance: $balance"
